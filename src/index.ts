@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from "express";
 import fs from "fs";
 import api from "./routes/api";
 import { loadCache } from "./cache/cache";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 
 const app: Express = express();
 const port = 3000;
@@ -22,3 +24,15 @@ app.listen(port, () => {
 		loadCache();
 	});
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc({
+	swaggerDefinition: {
+		openapi: '3.0.0',
+		info: {
+			title: 'Temperature API',
+			version: '1.0.0',
+			servers: ['http://localhost:3000']
+		}
+	},
+	apis: ['src/routes/*.ts'],
+})));
