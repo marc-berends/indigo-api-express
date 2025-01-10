@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import fs from "fs";
 import api from "./routes/api";
 import { loadCache } from "./cache/cache";
 
@@ -13,5 +14,11 @@ app.get("/", (req: Request, res: Response) => {
 
 app.listen(port, () => {
 	console.log(`Server is running at http://localhost:${port}`);
+	
 	loadCache();
+
+	fs.watchFile('data/measurements.txt', () => {
+		console.log('measurements.txt has changed');
+		loadCache();
+	});
 });

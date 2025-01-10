@@ -16,6 +16,10 @@ export const loadCache = async () => {
 	console.log('Loading cache...');
 	
 	const rl = readline.createInterface({ input: readStream });
+
+	rl.on('error', (err) => {
+		console.error('Error reading data/measurements.txt', err);
+	});
 	
 	rl.on('line', (line) => {
 		const [city, temp] = line.split(';');
