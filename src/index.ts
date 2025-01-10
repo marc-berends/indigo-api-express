@@ -1,7 +1,10 @@
 import express, { Express, Request, Response } from "express";
+import api from "./routes/api";
 
 const app: Express = express();
 const port = 3000;
+
+app.use('/api', api);
 
 app.get("/", (req: Request, res: Response) => {
 	res.send("Hello World!");
