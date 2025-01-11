@@ -1,0 +1,9 @@
+Ljubljana;1
+Koper;1
+Maribor;1
+Ljubljana;2
+Koper;2
+Maribor;2
+Ljubljana;3
+Koper;3
+Maribor;3
