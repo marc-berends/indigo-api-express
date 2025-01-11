@@ -9,7 +9,7 @@ export const login: RequestHandler = async (req, res) => {
 		return;
 	}
 
-	res.status(200).json(jwt.sign(req.body, process.env.SECRET as string, { expiresIn: '1h' }));
+	res.status(200).send(jwt.sign(req.body, process.env.SECRET as string, { expiresIn: '1h' }));
 };
 
 export const verifyToken: RequestHandler = async (req, res, next) => {

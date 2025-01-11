@@ -4,9 +4,22 @@ import City from '../models/city';
 import { TemperatureCalculation } from '../models/temperatureCalculation';
 import CityAverage from '../models/cityAverage';
 
-var cache: City[] = [];
+let cache: City[] = [];
 
 export const loadCache = async () => {
+	fs.readFile(process.env.CACHE as string, (err, data) => {
+		if (err) {
+			console.log(`Could not read ${process.env.CACHE}`);
+			return;
+		}
+
+		cache = JSON.parse(data.toString()).map((c: City) => new City(c.name, c.minTemp, c.maxTemp, c.avgTemp));
+
+		updateCache();
+	});
+}
+
+const updateCache = () => {
 	let calculations: {
 		[key: string]: TemperatureCalculation
 	} = {};
@@ -54,6 +67,16 @@ export const loadCache = async () => {
 		});
 
 		console.log('Cache loaded');
+
+		fs.writeFile(
+			process.env.CACHE as string,
+			JSON.stringify(cache),
+			(err) => {
+				if (err) {
+					console.error(`Error writing ${process.env.CACHE}`, err);
+				}
+			}
+		);
 	});
 }
 
