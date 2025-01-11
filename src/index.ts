@@ -7,7 +7,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 
 const app: Express = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 dotenv.config();
 
@@ -24,7 +24,7 @@ app.listen(port, () => {
 	
 	loadCache();
 
-	fs.watchFile('data/measurements.txt', () => {
+	fs.watchFile(process.env.DATA as string, () => {
 		console.log('measurements.txt has changed');
 		loadCache();
 	});
@@ -36,7 +36,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc({
 		info: {
 			title: 'Temperature API',
 			version: '1.0.0',
-			servers: ['http://localhost:3000']
+			servers: [`http://localhost:${port}`],
 		}
 	},
 	apis: ['src/routes/*.ts'],

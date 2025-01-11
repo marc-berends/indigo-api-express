@@ -11,14 +11,14 @@ export const loadCache = async () => {
 		[key: string]: TemperatureCalculation
 	} = {};
 	
-	const readStream = fs.createReadStream('data/measurements.txt');
+	const readStream = fs.createReadStream(process.env.DATA as string);
 
 	console.log('Loading cache...');
 	
 	const rl = readline.createInterface({ input: readStream });
 
 	rl.on('error', (err) => {
-		console.error('Error reading data/measurements.txt', err);
+		console.error(`Error reading ${process.env.DATA}`, err);
 	});
 	
 	rl.on('line', (line) => {
