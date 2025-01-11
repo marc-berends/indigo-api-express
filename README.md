@@ -35,6 +35,8 @@ When the server has started, or when the `measurements.txt` file has been change
 
 While this is happening, the console will display `Loading cache...`. During this time the results of the API endpoints will be empty or come from the previous cache. Once the console displays `Cache loaded` the results will be updated.
 
+The cache gets saved to `/data/measurements_cache.json` and is loaded when the server restarts while the actual data is updated asynchronously.
+
 ## API Endpoints
 
 [http://localhost:3000/api-docs/](http://localhost:3000/api-docs) hosts the swagger UI.
