@@ -41,7 +41,7 @@ While this is happening, the console will display `Loading cache...`. During thi
 
 [http://localhost:3000/api/temperatures/](http://localhost:3000/api/temperatures/) returns a JSON array of every city containing name, min, max and average temperatures.
 
-[http://localhost:3000/api/temperatures/{city}](http://localhost:3000/api/temperatures/New%20Delhi/) returns JSON object containing name, min, max and average temperatures for the specified city (in this example "New%20Delhi").
+[http://localhost:3000/api/temperatures/{city}](http://localhost:3000/api/temperatures/New%20Delhi/) returns JSON object containing name, min, max and average temperatures for the specified city (in this example "New Delhi").
 
 [http://localhost:3000/api/temperatures/larger/{temp}](http://localhost:3000/api/temperatures/larger/0) returns a JSON array of every city with an average temperature larger than or equal to the specified value.
 
