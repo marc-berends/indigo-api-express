@@ -1,6 +1,6 @@
 # indigo-api-express
 
-Backend Express.js app with TypeScript, hosting a Swagger UI.
+Backend Express.js app with TypeScript and JWT authentication, hosting a Swagger UI.
 
 ## Installation
 Run in a terminal at the root directory:
@@ -39,6 +39,8 @@ While this is happening, the console will display `Loading cache...`. During thi
 
 [http://localhost:3000/api-docs/](http://localhost:3000/api-docs) hosts the swagger UI.
 
+[http://localhost:3000/api/login/](http://localhost:3000/api/login/) returns a JWT token to access the API . 
+
 [http://localhost:3000/api/temperatures/](http://localhost:3000/api/temperatures/) returns a JSON array of every city containing name, min, max and average temperatures.
 
 [http://localhost:3000/api/temperatures/{city}](http://localhost:3000/api/temperatures/New%20Delhi/) returns JSON object containing name, min, max and average temperatures for the specified city (in this example "New Delhi").
@@ -46,3 +48,11 @@ While this is happening, the console will display `Loading cache...`. During thi
 [http://localhost:3000/api/temperatures/larger/{temp}](http://localhost:3000/api/temperatures/larger/0) returns a JSON array of every city with an average temperature larger than or equal to the specified value.
 
 [http://localhost:3000/api/temperatures/smaller/{temp}](http://localhost:3000/api/temperatures/smaller/0) returns a JSON array of every city with an average temperature smaller than or equal to the specified value.
+
+## Authentication
+
+To authorize API requests, first send a `POST` request to `http://localhost:3000/api/login/` that contains a body with the format `{ username: 'USERNAME', password: 'PASSWORD' }` (the password is hard-coded `PASSWORD`).
+
+This will return a JWT token which needs to be sent in the Authorization Header of each new request in the format `Bearer {JWT}`.
+
+To use this in the Swagger UI, open the `Authorize` popup in the top right and copy the token into `Value` and click `Authorize`. This will authorize all requests until the token expires (default is 1h).

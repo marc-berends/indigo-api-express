@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import dotenv from "dotenv";
 import fs from "fs";
 import api from "./routes/api";
 import { loadCache } from "./cache/cache";
@@ -7,6 +8,10 @@ import swaggerJsdoc from "swagger-jsdoc";
 
 const app: Express = express();
 const port = 3000;
+
+dotenv.config();
+
+app.use(express.json());
 
 app.use('/api', api);
 
