@@ -24,6 +24,9 @@ export const loadCache = async () => {
 	rl.on('line', (line) => {
 		const [city, temp] = line.split(';');
 		const tempNum = parseFloat(temp);
+		if (!city || !temp || isNaN(tempNum)) {
+			return;
+		}
 		
 		if (!calculations[city]) {
 			calculations[city] = {
