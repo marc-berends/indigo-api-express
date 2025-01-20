@@ -10,6 +10,7 @@ export const loadCache = async () => {
 	fs.readFile(process.env.CACHE as string, (err, data) => {
 		if (err) {
 			console.log(`Could not read ${process.env.CACHE}`);
+			updateCache();
 			return;
 		}
 
